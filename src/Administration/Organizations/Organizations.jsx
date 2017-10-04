@@ -55,12 +55,12 @@ class Organizations extends Component {
             <Col md={12}>
 
                 <Panel collapsible header={organization.name}>
-                    <p><Link to={`/organizations/${organization._id}`}>{organization.name}</Link></p>
+                    <p><Link to={`/admin/organizations/${organization._id}`}>{organization.name}</Link></p>
                     <p>Type: {organization.type}</p>
                     <p>Creation Date: {organization.creationDate}</p>
                     <p>Counselor Name: {organization.counselorName}</p>
                     <p>Counselor Email: {organization.counselorEmail}</p>
-                    <Link to={`/organizations/${organization._id}`}><Button className="btn btn-primary">Details</Button></Link>
+                    <Link to={`/admin/organizations/${organization._id}`}><Button className="btn btn-primary">Details</Button></Link>
                 </Panel>
 
             </Col>

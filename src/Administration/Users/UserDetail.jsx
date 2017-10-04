@@ -10,7 +10,7 @@ import {
 
 const PAGE_SIZE = 10;
 
-class OrganizationDetail extends Component {
+class UserDetail extends Component {
     static dataFetcher({urlBase, location}) {
         const query = Object.assign({}, location.query);
         const pageStr = query._page;
@@ -32,12 +32,12 @@ class OrganizationDetail extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            organization: {
+            user: {
                 _id: 0,
-                name: '',
-                creationDate: '',
-                counselorName: '',
-                counselorEmail: ''
+                firstName: '',
+                lastName: '',
+                email: '',
+                role: ''
             }
         }
     }
@@ -45,11 +45,11 @@ class OrganizationDetail extends Component {
     componentDidMount() {
         console.log('this.props.params.id: ' + this.props.params.id);
         let id = this.props.params.id;
-        fetch(`/api/organizations/${id}`).then(response => {
+        fetch(`/api/users/${id}`).then(response => {
             response.json().then(data => {
                 console.log(data);
-                this.setState({organization: data});
-                console.log(this.state.organization._id);
+                this.setState({user: data});
+                console.log(this.state.user._id);
             }).catch(err => {
                 console.log(err)
                 //this.props.showError(`Error in sending data to server: ${err.message}`);
@@ -70,23 +70,22 @@ class OrganizationDetail extends Component {
                 <ol className="breadcrumb">
                     <li/>
                     <li><Link to={`/admin/`}>Admin Panel</Link></li>
-                    <li><Link to={`/admin/organizations`}>Organizations</Link></li>
-                    <li className="active">Organization Details</li>
+                    <li><Link to={`/admin/users`}>Users</Link></li>
+                    <li className="active">User Details</li>
                 </ol>
                 <Col md={2}>
                 </Col>
                 <Col md={12}>
 
-                    <Panel  header={this.state.organization.name}>
+                    <Panel  header={this.state.user.firstName + ' ' +  this.state.user.lastName}>
                         {/*<td><Link to={`/activities/${this.state.activity._id}`}>{this.state.activity.requestTitle}</Link></td>*/}
-                        <p>Organization Name: {this.state.organization.name}</p>
-                        <p>Creation Date: {this.state.organization.creationDate}</p>
-                        <p>Counselor Name: {this.state.organization.counselorName}</p>
-                        <p>Counselor Email: {this.state.organization.counselorEmail}</p>
+                        <p>Role: {this.state.user.role}</p>
+                        <p>Creation Date: {this.state.user.creationDate}</p>
+                        <p>Email: {this.state.user.email}</p>
 
 
                         <Row>
-                            <Col md="1"><Link to={`/activities/`}><Button className="btn btn-primary">Back</Button></Link></Col>
+                            <Col md="1"><Link to={`/admin/users/`}><Button className="btn btn-primary">Back</Button></Link></Col>
                             <Col md="1"><Button className="btn-success">Contact</Button></Col>
                             <Col md="1"><Button className="btn-warning">Edit</Button></Col>
                         </Row>
@@ -102,8 +101,8 @@ class OrganizationDetail extends Component {
 }
 
 
-OrganizationDetail.contextTypes = {
+UserDetail.contextTypes = {
     initialState: React.PropTypes.object,
 };
 
-export default OrganizationDetail;
+export default UserDetail;

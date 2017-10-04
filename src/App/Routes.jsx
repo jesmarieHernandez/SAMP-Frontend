@@ -15,6 +15,8 @@ import CreateFacilities from '../Administration/Facilities/NewFacilities.jsx';
 import Users from '../Administration/Users/Users.jsx';
 import CreateUser from "../Administration/Users/NewUser.jsx";
 import FacilitiesDetail from "../Administration/Facilities/FacilitiesDetail.jsx";
+import OrganizationDetail from "../Administration/Organizations/OrganizationDetail.jsx";
+import UserDetail from "../Administration/Users/UserDetail.jsx";
 
 const NoMatch = () => <p>Page Not Found</p>;
 
@@ -29,6 +31,8 @@ export default(
         <Route path="stats" component={withRouter(Stats)} />
         <Route path="admin" component={withRouter(Admin)} />
         <Route path="admin/organizations" component={withRouter(Organizations)} />
+        <Route path="admin/organizations/:id" component={withRouter(OrganizationDetail)} />
+
         <Route path="admin/organizations/create" component={withRouter(Something)} />
 
         <Route path="admin/facilities" component={withRouter(Facilities)} />
@@ -37,6 +41,8 @@ export default(
         <Route path="admin/facilities/create" component={withRouter(CreateFacilities)} />
 
         <Route path="admin/users" component={withRouter(Users)} />
+        <Route path="admin/users/:id" component={withRouter(UserDetail)} />
+
         <Route path="admin/users/create" component={withRouter(CreateUser)} />
 
         {/*<Route path="*" component={NoMatch} />*/}

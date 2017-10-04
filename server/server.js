@@ -227,6 +227,54 @@ app.get('/api/facilities/:id', (req, res) => {
         });
 });
 
+app.get('/api/organizations/:id', (req, res) => {
+    let organizationID;
+    try {
+        organizationID = new ObjectId(req.params.id);
+    } catch (error) {
+        res.status(422).json({message: `Invalid organization ID format: ${error}`});
+        return;
+    }
+
+    db.collection('organizations').find({_id: organizationID}).limit(1)
+        .next()
+        .then(result => {
+            console.log(result);
+            if (!result) res.status(404).json({message: `No such organization: ${organizationID}`});
+            else {
+                res.json(result)
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({message: `Internal Server Error: ${error}`});
+        });
+});
+
+app.get('/api/users/:id', (req, res) => {
+    let userID;
+    try {
+        userID = new ObjectId(req.params.id);
+    } catch (error) {
+        res.status(422).json({message: `Invalid user ID format: ${error}`});
+        return;
+    }
+
+    db.collection('users').find({_id: userID}).limit(1)
+        .next()
+        .then(result => {
+            console.log(result);
+            if (!result) res.status(404).json({message: `No such user: ${userID}`});
+            else {
+                res.json(result)
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({message: `Internal Server Error: ${error}`});
+        });
+});
+
 
 app.use('/', renderedPageRouter);
 

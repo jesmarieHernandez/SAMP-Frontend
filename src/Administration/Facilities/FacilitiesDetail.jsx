@@ -57,51 +57,6 @@ class FacilitiesDetail extends Component {
         })
     }
 
-    onSubmit(event) {
-        event.preventDefault();
-
-        console.log('Form was submitted');
-
-        //this.showValidation();
-
-        // if (Object.keys(this.state.invalidFields).length !== 0) {
-        //     return;
-        // }
-        // const form = document.forms.activityRequest;
-
-
-        // const activityRequest = {
-        //     requestTitle: form.requestTitle.value,
-        //     organizationName: form.organizationName.value,
-        //     requestDate: new Date(),
-        //     facilities: form.facilities.value
-        // };
-
-
-        // console.log(activityRequest);
-        // fetch('/api/activities', {
-        //     method: 'POST',
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: JSON.stringify(activityRequest),
-        // }).then(response => {
-        //     if (response.ok) {
-        //         console.log(response);
-        //         response.json().then(createdRequest => {
-        //             console.log('Activity request was created successfully!');
-        //             console.log('Activity request ID: ' + createdRequest._id);
-        //
-        //             //this.props.router.push(`/activities/${createdRequest._id}`);
-        //         })
-        //     } else {
-        //         response.json().then(error => {
-        //             //this.props.showError(`Failed to create request: ${error.message}`);
-        //         });
-        //     }
-        // }).catch(err => {
-        //     //this.props.showError(`Error in sending data to server: ${err.message}`);
-        // });
-    }
-
 
     render() {
 

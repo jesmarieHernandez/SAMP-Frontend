@@ -55,13 +55,10 @@ class Users extends Component {
             <Col md={12}>
 
                 <Panel collapsible header={users.firstName + ' ' + users.lastName}>
-                    {/*<p><Link to={`/facilities/${users._id}`}>{users.name}</Link></p>*/}
-                    {/*<p>First Name: {users.firstName}</p>*/}
-                    {/*<p>Last Name: {users.lastName}</p>*/}
                     <p>Role: {users.role}</p>
                     <p>Email: {users.email}</p>
                     <p>Creation Date: {users.creationDate}</p>
-                    <Link to={`/users/${users._id}`}><Button className="btn btn-primary">Details</Button></Link>
+                    <Link to={`/admin/users/${users._id}`}><Button className="btn btn-primary">Details</Button></Link>
                 </Panel>
 
             </Col>

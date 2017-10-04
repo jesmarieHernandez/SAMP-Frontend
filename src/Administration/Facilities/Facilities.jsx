@@ -76,7 +76,7 @@ class Facilities extends Component {
                     <li className="active">Facilities</li>
                 </ol>
                 <Col md={3}>
-                    <Panel collapse header='Manage Organizations'>
+                    <Panel collapse header='Manage Facilities'>
                         <ul>
                             <li><Link to={`/admin/facilities/create`}>Create New Facilities</Link></li>
                             <li>Edit Existing Facilities</li>
