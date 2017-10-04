@@ -203,6 +203,30 @@ app.get('/api/activities/:id', (req, res) => {
         });
 });
 
+app.get('/api/facilities/:id', (req, res) => {
+    let facilitiesID;
+    try {
+        facilitiesID = new ObjectId(req.params.id);
+    } catch (error) {
+        res.status(422).json({message: `Invalid facilities ID format: ${error}`});
+        return;
+    }
+
+    db.collection('facilities').find({_id: facilitiesID}).limit(1)
+        .next()
+        .then(result => {
+            console.log(result);
+            if (!result) res.status(404).json({message: `No such request: ${facilitiesID}`});
+            else {
+                res.json(result)
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({message: `Internal Server Error: ${error}`});
+        });
+});
+
 
 app.use('/', renderedPageRouter);
 

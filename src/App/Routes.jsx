@@ -14,6 +14,7 @@ import Facilities from '../Administration/Facilities/Facilities.jsx';
 import CreateFacilities from '../Administration/Facilities/NewFacilities.jsx';
 import Users from '../Administration/Users/Users.jsx';
 import CreateUser from "../Administration/Users/NewUser.jsx";
+import FacilitiesDetail from "../Administration/Facilities/FacilitiesDetail.jsx";
 
 const NoMatch = () => <p>Page Not Found</p>;
 
@@ -31,6 +32,8 @@ export default(
         <Route path="admin/organizations/create" component={withRouter(Something)} />
 
         <Route path="admin/facilities" component={withRouter(Facilities)} />
+        <Route path="admin/facilities/:id" component={withRouter(FacilitiesDetail)} />
+
         <Route path="admin/facilities/create" component={withRouter(CreateFacilities)} />
 
         <Route path="admin/users" component={withRouter(Users)} />

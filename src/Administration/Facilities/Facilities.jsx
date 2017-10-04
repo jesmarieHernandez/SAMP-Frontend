@@ -31,7 +31,9 @@ class Facilities extends Component {
     }
 
     componentDidMount() {
-        fetch('/api/facilities').then(response => {
+        console.log('this.props.params.id: ' + this.props.params.id);
+        let id = this.props.params.id;
+        fetch(`/api/facilities/`).then(response => {
             if (response.ok) {
                 response.json().then(results => {
                     //console.log(results);
@@ -50,16 +52,17 @@ class Facilities extends Component {
     }
 
     render() {
+        console.log(this.state.facilities);
         const facilities = this.state.facilities.map(facilities =>
 
             <Col md={12}>
 
                 <Panel collapsible header={facilities.name}>
-                    <p><Link to={`/facilities/${facilities._id}`}>{facilities.name}</Link></p>
+                    <p><Link to={`/admin/facilities/${facilities._id}`}>{facilities.name}</Link></p>
                     <p>Creation Date: {facilities.creationDate}</p>
                     <p>Manager Name: {facilities.managerName}</p>
                     <p>Manager Email: {facilities.managerEmail}</p>
-                    <Link to={`/facilities/${facilities._id}`}><Button className="btn btn-primary">Details</Button></Link>
+                    <Link to={`/admin/facilities/${facilities._id}`}><Button className="btn btn-primary">Details</Button></Link>
                 </Panel>
 
             </Col>
