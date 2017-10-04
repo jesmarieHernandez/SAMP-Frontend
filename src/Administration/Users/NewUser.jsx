@@ -49,9 +49,8 @@ class CreateUser extends Component {
         const newUser = {
             firstName: form.userFirstName.value,
             lastName: form.userLastName.value,
-            email: form.userPassword.value,
+            email: form.userEmail.value,
             role: form.userRole.value,
-            password: form.userPassword.value,
             creationDate: new Date(),
 
         };
@@ -59,7 +58,7 @@ class CreateUser extends Component {
 
 
         console.log(newUser);
-        fetch('/api/user', {
+        fetch('/api/users', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newUser),
@@ -102,7 +101,7 @@ class CreateUser extends Component {
                         <p>User First Name</p>
                         <p>User Last Name</p>
                         <p>User Email</p>
-                        <p>User Password</p>
+                        {/*<p>User Password</p>*/}
 
                     </Panel>
                 </Col>
@@ -129,18 +128,19 @@ class CreateUser extends Component {
                                     <FormControl name="userLastName"/>
                                 </Col>
                             </FormGroup>
+
                             <FormGroup>
                                 <Col sm={4}>
                                     <Col componentClass={ControlLabel}>Email</Col>
                                     <FormControl name="userEmail"/>
                                 </Col>
                             </FormGroup>
-                            <FormGroup>
-                                <Col sm={4}>
-                                    <Col componentClass={ControlLabel}>Password</Col>
-                                    <FormControl name="userPassword"/>
-                                </Col>
-                            </FormGroup>
+                            {/*<FormGroup>*/}
+                                {/*<Col sm={4}>*/}
+                                    {/*<Col componentClass={ControlLabel}>Password</Col>*/}
+                                    {/*<FormControl name="userPassword"/>*/}
+                                {/*</Col>*/}
+                            {/*</FormGroup>*/}
 
                             <ButtonToolbar>
                                 <Col md={6}>

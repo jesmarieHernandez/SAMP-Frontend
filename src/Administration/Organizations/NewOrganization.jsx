@@ -57,7 +57,7 @@ class Something extends Component {
 
 
         console.log(newOrganization);
-        fetch('/api/organization', {
+        fetch('/api/organizations', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newOrganization),

@@ -25,9 +25,45 @@ class Facilities extends Component {
 
     constructor(props, context) {
         super(props, context);
+        this.state = {
+            facilities: []
+        }
+    }
+
+    componentDidMount() {
+        fetch('/api/facilities').then(response => {
+            if (response.ok) {
+                response.json().then(results => {
+                    //console.log(results);
+                    this.setState({facilities: results});
+                    console.log(this.state.facilities);
+                    //this.props.router.push(`/activities/${createdRequest._id}`);
+                });
+            } else {
+                // response.json().then(error => {
+                //     this.props.showError(`Failed to add issue: ${error.message}`);
+                // });
+            }
+        }).catch(err => {
+            this.props.showError(`Error in sending data to server: ${err.message}`);
+        });
     }
 
     render() {
+        const facilities = this.state.facilities.map(facilities =>
+
+            <Col md={12}>
+
+                <Panel collapsible header={facilities.name}>
+                    <p><Link to={`/facilities/${facilities._id}`}>{facilities.name}</Link></p>
+                    <p>Creation Date: {facilities.creationDate}</p>
+                    <p>Manager Name: {facilities.managerName}</p>
+                    <p>Manager Email: {facilities.managerEmail}</p>
+                    <Link to={`/facilities/${facilities._id}`}><Button className="btn btn-primary">Details</Button></Link>
+                </Panel>
+
+            </Col>
+        );
         return (
             <div className="container">
                 {/*<Jumbotron><h3>Admin Panel</h3></Jumbotron>*/}
@@ -36,15 +72,19 @@ class Facilities extends Component {
                     <li><Link to={`/admin/`}>Admin Panel</Link></li>
                     <li className="active">Facilities</li>
                 </ol>
-                <Col md={3}></Col>
-                <Col md={6}>
-
-                    <Panel collapse header='Manage Facilities'>
+                <Col md={3}>
+                    <Panel collapse header='Manage Organizations'>
                         <ul>
                             <li><Link to={`/admin/facilities/create`}>Create New Facilities</Link></li>
                             <li>Edit Existing Facilities</li>
                         </ul>
                     </Panel>
+                </Col>
+                <Col md={6}>
+                    <Panel collapse header='Facilities'>
+
+                    </Panel>
+                    {facilities}
 
                 </Col>
                 <Col md={3}></Col>

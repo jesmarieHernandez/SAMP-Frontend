@@ -35,9 +35,18 @@ class Admin extends Component {
                     <li/>
                     <li className="active">Admin Panel</li>
                 </ol>
-                <Col md={3}></Col>
-                <Col md={6}>
-                    <Panel collapse header='Manage Organizations'>
+                <Col md={3}>
+                    <Panel collapse header='Admin Panel'>
+                        <ul>
+                            <li ><Link to={`/admin/organizations`}>Manage Organizations</Link></li>
+                            <li ><Link to={`/admin/facilities`}>Manage Facilities</Link></li>
+                            <li ><Link to={`/admin/users`}>Manage Users</Link></li>
+
+                        </ul>
+                    </Panel>
+                </Col>
+                <Col md={9}>
+                    <Panel collapse header='Admin Panel'>
                         <ul>
                             <li ><Link to={`/admin/organizations`}>Manage Organizations</Link></li>
 
@@ -45,20 +54,7 @@ class Admin extends Component {
                             <li>Edit Existing Organization</li>
                         </ul>
                     </Panel>
-                    <Panel collapse header='Manage Facilities'>
-                        <ul>
-                            <li><Link to={`/admin/facilities`}>Manage Facilities </Link></li>
-                            <li>Create New Organization</li>
-                            <li>Edit Existing Organization</li>
-                        </ul>
-                    </Panel>
-                    <Panel collapse header='Manage Users'>
-                        <ul>
-                            <li><Link to={`/admin/Users`}>Manage Users</Link></li>
-                            <li>Create New Organization</li>
-                            <li>Edit Existing Organization</li>
-                        </ul>
-                    </Panel>
+
                 </Col>
                 <Col md={3}></Col>
 

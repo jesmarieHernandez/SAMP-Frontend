@@ -53,7 +53,7 @@ class Header extends Component {
                             <NavItem>Stats</NavItem>
                         </LinkContainer>
                         <LinkContainer to="/admin">
-                            <NavItem>Administration</NavItem>
+                            <NavItem>Admin Panel</NavItem>
                         </LinkContainer>
                     </Nav>
                 </Col>

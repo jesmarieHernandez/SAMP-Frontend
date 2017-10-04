@@ -36,6 +36,8 @@ export default(
         <Route path="admin/users" component={withRouter(Users)} />
         <Route path="admin/users/create" component={withRouter(CreateUser)} />
 
-        <Route path="*" component={NoMatch} />
+        {/*<Route path="*" component={NoMatch} />*/}
+        <Route path="*" component={withRouter(Home)} />
+
     </Route>
 );
