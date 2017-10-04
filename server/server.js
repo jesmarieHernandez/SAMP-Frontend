@@ -61,6 +61,71 @@ app.post('/api/request', (req, res) => {
         });
 });
 
+app.post('/api/user', (req, res) => {
+    console.log('/api/user');
+    console.log('request body:' + req.body);
+    const newUser = req.body;
+    //newActivity.requestDate = new Date();
+
+    console.log('db: ' + db);
+    db.collection('users').insertOne(newUser)
+        .then(result => {
+            console.log(result);
+            db.collection('users').find({_id: result.insertedId}).limit(1)
+                .next().then(user => {
+                console.log(user);
+                res.status(200).json(user);
+            })
+        }).catch(error => {
+        console.log('ERROR: ' + error);
+        res.status(500).json({message: `Internal Server Error: ${error}`});
+    });
+});
+
+app.post('/api/facilities', (req, res) => {
+    console.log('/api/facilities');
+    console.log('request body:' + req.body);
+    const newFacilities = req.body;
+    //newActivity.requestDate = new Date();
+
+    console.log('db: ' + db);
+    db.collection('facilities').insertOne(newFacilities)
+        .then(result => {
+            console.log(result);
+            db.collection('facilities').find({_id: result.insertedId}).limit(1)
+                .next().then(facilities => {
+                console.log(facilities);
+                res.status(200).json(facilities);
+            })
+        }).catch(error => {
+        console.log('ERROR: ' + error);
+        res.status(500).json({message: `Internal Server Error: ${error}`});
+    });
+});
+
+app.post('/api/organization', (req, res) => {
+    console.log('/api/organization');
+    console.log('request body:' + req.body);
+    const newOrganization = req.body;
+    //newActivity.requestDate = new Date();
+
+    console.log('db: ' + db);
+    db.collection('organizations').insertOne(newOrganization)
+        .then(result => {
+            console.log(result);
+            db.collection('organizations').find({_id: result.insertedId}).limit(1)
+                .next().then(organization => {
+                console.log(organization);
+                res.status(200).json(organization);
+            })
+        }).catch(error => {
+        console.log('ERROR: ' + error);
+        res.status(500).json({message: `Internal Server Error: ${error}`});
+    });
+});
+
+
+
 app.get('/api/activities/', (req, res) => {
     db.collection('activities').find().toArray()
         .then(results => {

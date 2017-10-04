@@ -5,7 +5,7 @@ import {Button, Glyphicon, Table, Panel, Pagination, Col, Jumbotron} from 'react
 
 const PAGE_SIZE = 10;
 
-class Admin extends Component {
+class Organizations extends Component {
     static dataFetcher({urlBase, location}) {
         const query = Object.assign({}, location.query);
         const pageStr = query._page;
@@ -33,25 +33,14 @@ class Admin extends Component {
                 {/*<Jumbotron><h3>Admin Panel</h3></Jumbotron>*/}
                 <ol className="breadcrumb">
                     <li/>
-                    <li className="active">Admin Panel</li>
+                    <li ><Link to={`/admin/`}>Admin Panel</Link></li>
+                    <li className="active">Organizations</li>
                 </ol>
                 <Col md={3}></Col>
                 <Col md={6}>
                     <Panel collapse header='Manage Organizations'>
                         <ul>
-                            <li>Create New Organization</li>
-                            <li>Edit Existing Organization</li>
-                        </ul>
-                    </Panel>
-                    <Panel collapse header='Manage Facilities'>
-                        <ul>
-                            <li>Create New Organization</li>
-                            <li>Edit Existing Organization</li>
-                        </ul>
-                    </Panel>
-                    <Panel collapse header='Manage Users'>
-                        <ul>
-                            <li>Create New Organization</li>
+                            <li><Link to={`/admin/organizations/create`}>Create New Organization</Link></li>
                             <li>Edit Existing Organization</li>
                         </ul>
                     </Panel>
@@ -64,8 +53,8 @@ class Admin extends Component {
     }
 }
 
-Admin.contextTypes = {
+Organizations.contextTypes = {
     initialState: React.PropTypes.object,
 };
 
-export default Admin;
+export default Organizations;

@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 
 import {
     FormGroup, FormControl, ControlLabel, ButtonToolbar, Button,
-    Panel, Form, Col, Alert, Radio, Well, MenuItem, DropdownButton, Jumbotron
+    Panel, Form, Col, Alert, Radio, Well, MenuItem, DropdownButton, Jumbotron, Row
 } from 'react-bootstrap';
 
 
@@ -122,6 +122,14 @@ class ActivityDetail extends Component {
                         <p>Organization Name: {this.state.activity.organizationName}</p>
                         <p>Request Title: {this.state.activity.requestDate}</p>
                         <p>Request Description: {this.state.activity.facilities}</p>
+
+                        <Row>
+                            <Col md="1"><Link to={`/activities/`}><Button className="btn btn-primary">Back</Button></Link></Col>
+                            <Col md="1"><Button className="btn-success">Approve</Button></Col>
+                            <Col md="1"><Button className="btn-danger">Decline</Button></Col>
+                        </Row>
+
+
                     </Panel>
                 </Col>
             {/*<Col md={8}>*/}

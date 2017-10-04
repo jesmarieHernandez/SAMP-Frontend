@@ -5,8 +5,8 @@ import { match, RouterContext } from 'react-router';
 import Router from 'express';
 
 import template from './template.js';
-import routes from '../src/Routes.jsx'
-import ContextWrapper from '../src/ContextWrapper.jsx';
+import routes from '../src/App/Routes.jsx'
+import ContextWrapper from '../src/App/ContextWrapper.jsx';
 
 const renderedPageRouter = new Router();
 
