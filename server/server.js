@@ -40,7 +40,7 @@ app.get('/api/users/me', (req, res) => {
     }
 });
 
-app.post('/api/requests', (req, res) => {
+app.post('/api/activities', (req, res) => {
     console.log('/api/activities');
     console.log('request body:' + req.body);
     const newActivity = req.body;

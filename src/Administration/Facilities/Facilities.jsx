@@ -78,7 +78,7 @@ class Facilities extends Component {
                 <Col md={3}>
                     <Panel collapse header='Manage Facilities'>
                         <ul>
-                            <li><Link to={`/admin/facilities/create`}>Create New Facilities</Link></li>
+                            <li><Link to={`/admin/facilities/create/`}>Create New Facilities</Link></li>
                             <li>Edit Existing Facilities</li>
                         </ul>
                     </Panel>

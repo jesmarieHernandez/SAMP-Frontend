@@ -32,22 +32,54 @@ class Request extends Component {
     constructor(props, context) {
         super(props, context);
 
-        // this.state = {
-        //     eventDate: value,
-        //     theValue: {},
-        //     organizationName: '',
-        //     selectedOrganizationInfo:
-        //         {
-        //             organizationName: '',
-        //             organizationAcronym: '',
-        //             counselorFirstName: '',
-        //             counselorLastName: '',
-        //             counselorAddress: '',
-        //             counselorPhone: ''
-        //         },
-        //     requestedFacilitiesInfo: {},
-        //     invalidFields: {}, showingValidation: false,
-        // };
+        this.state = {
+            organizations: [],
+            facilities: [],
+            selectedOrganization: {
+
+            },
+            selectedFacilities: {}
+        }
+
+        ;
+
+        this.onOrganizationSelected = this.onOrganizationSelected.bind(this);
+        this.onFacilitiesSelected = this.onFacilitiesSelected.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+
+    }
+
+    componentDidMount() {
+        fetch('/api/organizations').then(response => {
+            if (response.ok) {
+                response.json().then(results => {
+                    this.setState({organizations: results});
+                });
+            } else {
+                // response.json().then(error => {
+                //     this.props.showError(`Failed to add issue: ${error.message}`);
+                // });
+            }
+        }).catch(err => {
+            this.props.showError(`Error in sending data to server: ${err.message}`);
+        });
+
+        fetch(`/api/facilities/`).then(response => {
+            if (response.ok) {
+                response.json().then(results => {
+                    //console.log(results);
+                    this.setState({facilities: results});
+                    console.log(this.state.facilities);
+                    //this.props.router.push(`/activities/${createdRequest._id}`);
+                });
+            } else {
+                // response.json().then(error => {
+                //     this.props.showError(`Failed to add issue: ${error.message}`);
+                // });
+            }
+        }).catch(err => {
+            this.props.showError(`Error in sending data to server: ${err.message}`);
+        });
     }
 
     onSubmit(event) {
@@ -65,9 +97,9 @@ class Request extends Component {
 
         const activityRequest = {
             requestTitle: form.requestTitle.value,
-            organizationName: form.organizationName.value,
+            organization: this.state.selectedOrganization,
             requestDate: new Date(),
-            facilities: form.facilities.value
+            facilities: this.state.selectedFacilities
         };
 
 
@@ -83,7 +115,7 @@ class Request extends Component {
                     console.log('Activity request was created successfully!');
                     console.log('Activity request ID: ' + createdRequest._id);
 
-                    //this.props.router.push(`/activities/${createdRequest._id}`);
+                    this.props.router.push(`/activities/${createdRequest._id}`);
                 })
             } else {
                 response.json().then(error => {
@@ -93,22 +125,54 @@ class Request extends Component {
         }).catch(err => {
             //this.props.showError(`Error in sending data to server: ${err.message}`);
         });
+
+
+    }
+
+    onOrganizationSelected(event) {
+
+        console.log('Change happened');
+        console.log(event.target.value);
+        const selectedOrganization = this.state.organizations.filter(function (obj) {
+            return obj._id === event.target.value;
+        });
+        this.setState({selectedOrganization: selectedOrganization[0]});
+        console.log("Selected organization: " + this.state.selectedOrganization.name);
+
+    }
+
+    onFacilitiesSelected(event) {
+
+        console.log('Change happened');
+        console.log(event.target.value);
+        const selectedFacilities = this.state.facilities.filter(function (obj) {
+            return obj._id == event.target.value;
+        });
+        console.log(selectedFacilities[0]);
+        this.setState({selectedFacilities: selectedFacilities[0]});
+        console.log("Selected facilities: " + this.state.selectedFacilities.managerName);
     }
 
 
     render() {
 
+        const organizationOptions = this.state.organizations.map(organization =>
+            <option value={organization._id}>{organization.name}</option>
+        );
+
+        const facilitiesOptions = this.state.facilities.map(facilities =>
+            <option value={facilities._id}>{facilities.name}</option>
+        );
+
         return (
             <div className="container">
-                {/*<Jumbotron><h3>Request New Activity</h3></Jumbotron>*/}
                 <ol className="breadcrumb">
                     <li/>
                     <li className="active">Admin Panel</li>
                 </ol>
                 <Col md={3}>
-                    <Panel collapse header='Instructions'>
+                    <Panel header='Instructions'>
                         {/*<td><Link to={`/activities/1`}>Hello</Link></td>*/}
-
                         <p>Organization Acronym</p>
                         <p>Request Title</p>
                         <p>Request Description</p>
@@ -119,24 +183,38 @@ class Request extends Component {
                     {/*<div onClick={this.onSubmit}><Button>Request</Button></div>*/}
                     <Panel header="Request New Activity">
                         <Form horizontal onSubmit={this.onSubmit} name="activityRequest">
-                                <FormGroup>
-                                    <Col sm={4}>
-                                        <Col componentClass={ControlLabel}>Request Title</Col>
-                                        <FormControl name="requestTitle"/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Col sm={4}>
-                                        <Col componentClass={ControlLabel}>Organization Name</Col>
-                                        <FormControl name="organizationName"/>
-                                    </Col>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Col sm={4}>
-                                        <Col componentClass={ControlLabel}>Facilities</Col>
-                                        <FormControl name="facilities"/>
-                                    </Col>
-                                </FormGroup>
+                            <FormGroup>
+                                <Col sm={4}>
+                                    <Col componentClass={ControlLabel}>Request Title</Col>
+                                    <FormControl name="requestTitle"/>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup>
+                                <Col md={4}>
+                                    <Col componentClass={ControlLabel}>Organization</Col>
+
+                                    <FormControl componentClass="select" name="selectOrganization"
+                                                 onChange={this.onOrganizationSelected}
+
+                                                 placeholder="select">
+                                        <option>select</option>
+                                        {organizationOptions}
+                                    </FormControl>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup>
+                                <Col md={4}>
+                                    <Col componentClass={ControlLabel}>Facilities</Col>
+
+                                    <FormControl componentClass="select" name="selectFacilities"
+                                                 onChange={this.onFacilitiesSelected}
+
+                                                 placeholder="select">
+                                        <option>select</option>
+                                        {facilitiesOptions}
+                                    </FormControl>
+                                </Col>
+                            </FormGroup>
                             <ButtonToolbar>
                                 <Col md={6}>
                                     <Button bsStyle="primary" type="submit">

@@ -10,7 +10,7 @@ import {
 
 const PAGE_SIZE = 10;
 
-class Something extends Component {
+class CreateOrganization extends Component {
     static dataFetcher({urlBase, location}) {
         const query = Object.assign({}, location.query);
         const pageStr = query._page;
@@ -148,8 +148,8 @@ class Something extends Component {
 }
 
 
-Something.contextTypes = {
+CreateOrganization.contextTypes = {
     initialState: React.PropTypes.object,
 };
 
-export default Something;
+export default CreateOrganization;

@@ -84,7 +84,7 @@ class CreateFacilities extends Component {
                     console.log('New facilities were created successfully!');
                     console.log('Facilities ID: ' + createdFacilities._id);
 
-                    //this.props.router.push(`/activities/${createdRequest._id}`);
+                    this.props.router.push(`/admin/facilities/${createdFacilities._id}/`);
                 })
             } else {
                 response.json().then(error => {

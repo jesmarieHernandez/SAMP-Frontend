@@ -34,10 +34,7 @@ class Organizations extends Component {
         fetch('/api/organizations').then(response => {
             if (response.ok) {
                 response.json().then(results => {
-                    //console.log(results);
                     this.setState({organizations: results});
-                    console.log(this.state.activities);
-                    //this.props.router.push(`/activities/${createdRequest._id}`);
                 });
             } else {
                 // response.json().then(error => {
@@ -76,7 +73,7 @@ class Organizations extends Component {
                 <Col md={3}>
                     <Panel collapse header='Manage Organizations'>
                         <ul>
-                            <li><Link to={`/admin/organizations/create`}>Create New Organization</Link></li>
+                            <li><Link to={`/admin/organizations/create/`}>Create New Organization</Link></li>
                             <li>Edit Existing Organization</li>
                         </ul>
                     </Panel>

@@ -59,9 +59,9 @@ class Home extends Component {
 
                 <Panel  header={activity.requestTitle}>
                     <td><Link to={`/activities/${activity._id}`}>{activity.requestTitle}</Link></td>
-                    <p>Organization Acronym: {activity.organizationName}</p>
+                    <p>Organization Acronym: {activity.organization.name}</p>
                     <p>Request Title: {activity.requestDate}</p>
-                    <p>Request Description: {activity.facilities}</p>
+                    <p>Request Description: {activity.facilities.name}</p>
                 </Panel>
             </Col>
         );

@@ -9,7 +9,7 @@ import Admin from '../Administration/Admin.jsx';
 import Request from '../Activities/Request.jsx';
 import ActivityDetail from "../Activities/ActivityDetail.jsx";
 import Organizations from '../Administration/Organizations/Organizations.jsx';
-import Something from '../Administration/Organizations/NewOrganization.jsx';
+import CreateOrganization from '../Administration/Organizations/NewOrganization.jsx';
 import Facilities from '../Administration/Facilities/Facilities.jsx';
 import CreateFacilities from '../Administration/Facilities/NewFacilities.jsx';
 import Users from '../Administration/Users/Users.jsx';
@@ -30,15 +30,16 @@ export default(
 
         <Route path="stats" component={withRouter(Stats)} />
         <Route path="admin" component={withRouter(Admin)} />
+
         <Route path="admin/organizations" component={withRouter(Organizations)} />
+        <Route path="admin/organizations/create" component={withRouter(CreateOrganization)} />
         <Route path="admin/organizations/:id" component={withRouter(OrganizationDetail)} />
 
-        <Route path="admin/organizations/create" component={withRouter(Something)} />
 
         <Route path="admin/facilities" component={withRouter(Facilities)} />
+        <Route path="admin/facilities/create/" component={withRouter(CreateFacilities)} />
         <Route path="admin/facilities/:id" component={withRouter(FacilitiesDetail)} />
 
-        <Route path="admin/facilities/create" component={withRouter(CreateFacilities)} />
 
         <Route path="admin/users" component={withRouter(Users)} />
         <Route path="admin/users/:id" component={withRouter(UserDetail)} />

@@ -62,9 +62,9 @@ class Activities extends Component {
 
             <Panel  header={activity.requestTitle}>
                 <td><Link to={`/activities/${activity._id}`}>{activity.requestTitle}</Link></td>
-                <p>Organization Acronym: {activity.organizationName}</p>
+                <p>Organization Acronym: {activity.organization.name}</p>
                 <p>Request Title: {activity.requestDate}</p>
-                <p>Request Description: {activity.facilities}</p>
+                <p>Request Description: {activity.facilities.name}</p>
             </Panel>
 
             </Col>
@@ -84,7 +84,7 @@ class Activities extends Component {
                             {/*<Breadcrumb.Item title="Activities" href="/activities"></Breadcrumb.Item>*/}
 
                         {/*</Breadcrumb>*/}
-                        <Panel collapse header='Search Activities'>
+                        <Panel header='Search Activities'>
                             {/*<td><Link to={`/activities/1`}>Hello</Link></td>*/}
                             <Select.Async
                                 instanceId="search" placeholder="Search ..." autoload={false} cache={false}
