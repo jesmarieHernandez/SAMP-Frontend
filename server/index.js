@@ -38,6 +38,10 @@ MongoClient.connect('mongodb://localhost/SAMP').then(connection => {
         console.log('Activities retrieved: ' + count);
         // db.close();
     });
+    db.collection('activities').find({status: 'pending'}).count().then((count) => {
+        console.log('Total pending activities: ' + count);
+        // db.close();
+    });
     server = http.createServer();
     appModule.setDb(db);
     server.on('request', appModule.app);

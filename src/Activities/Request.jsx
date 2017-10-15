@@ -38,13 +38,16 @@ class Request extends Component {
             selectedOrganization: {
 
             },
-            selectedFacilities: {}
+            selectedFacilities: {},
+            statusOptions: ['pending', 'celebrated', 'cancelled'],
+            selectedStatus: {},
         }
 
         ;
 
         this.onOrganizationSelected = this.onOrganizationSelected.bind(this);
         this.onFacilitiesSelected = this.onFacilitiesSelected.bind(this);
+        this.onStatusSelected = this.onStatusSelected.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
     }
@@ -87,6 +90,7 @@ class Request extends Component {
 
         console.log('Form was submitted');
 
+        console.log('Selected status: ' + this.state.selectedStatus);
         //this.showValidation();
 
         // if (Object.keys(this.state.invalidFields).length !== 0) {
@@ -99,7 +103,8 @@ class Request extends Component {
             requestTitle: form.requestTitle.value,
             organization: this.state.selectedOrganization,
             requestDate: new Date(),
-            facilities: this.state.selectedFacilities
+            facilities: this.state.selectedFacilities,
+            status: this.state.selectedStatus
         };
 
 
@@ -153,6 +158,15 @@ class Request extends Component {
         console.log("Selected facilities: " + this.state.selectedFacilities.managerName);
     }
 
+    onStatusSelected(event) {
+        const selectedStatus = this.state.statusOptions.filter(function (obj)  {
+            return obj == event.target.value;
+        });
+        console.log("Selected status: " + selectedStatus[0]);
+
+        this.setState({selectedStatus: selectedStatus[0]});
+        console.log("Selected status: " + this.state.selectedStatus);
+    }
 
     render() {
 
@@ -162,6 +176,10 @@ class Request extends Component {
 
         const facilitiesOptions = this.state.facilities.map(facilities =>
             <option value={facilities._id}>{facilities.name}</option>
+        );
+
+        const statusOptions = this.state.statusOptions.map(option =>
+            <option value={option}>{option}</option>
         );
 
         return (
@@ -212,6 +230,19 @@ class Request extends Component {
                                                  placeholder="select">
                                         <option>select</option>
                                         {facilitiesOptions}
+                                    </FormControl>
+                                </Col>
+                            </FormGroup>
+                            <FormGroup>
+                                <Col md={4}>
+                                    <Col componentClass={ControlLabel}>Status</Col>
+
+                                    <FormControl componentClass="select" name="selectStatus"
+                                                 onChange={this.onStatusSelected}
+
+                                                 placeholder="select">
+                                        <option>select</option>
+                                        {statusOptions}
                                     </FormControl>
                                 </Col>
                             </FormGroup>

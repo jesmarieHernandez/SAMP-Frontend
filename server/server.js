@@ -61,6 +61,52 @@ app.post('/api/activities', (req, res) => {
         });
 });
 
+app.get('/api/pending', (req, res) => {
+    console.log('/api/pending');
+
+    db.collection('activities').find({status: 'pending'}).count().then((count) => {
+        console.log('Total pending activities: ' + count);
+        if (!count) res.status(404).json({message: 'No pending activities'});
+        else {
+            res.json(count);
+        }
+    }).catch(error => {
+        console.log(error);
+        res.status(500).json({message: `Internal Server Error: ${error}`});
+    });
+});
+
+app.get('/api/celebrated', (req, res) => {
+    console.log('/api/pending');
+
+    db.collection('activities').find({status: 'celebrated'}).count().then((count) => {
+        console.log('Total pending activities: ' + count);
+        if (!count) res.status(404).json({message: 'No celebrated activities'});
+        else {
+            res.json(count);
+        }
+    }).catch(error => {
+        console.log(error);
+        res.status(500).json({message: `Internal Server Error: ${error}`});
+    });
+});
+
+app.get('/api/cancelled', (req, res) => {
+    console.log('/api/cancelled');
+
+    db.collection('activities').find({status: 'cancelled'}).count().then((count) => {
+        console.log('Total pending activities: ' + count);
+        if (!count) res.status(404).json({message: 'No cancelled activities'});
+        else {
+            res.json(count);
+        }
+    }).catch(error => {
+        console.log(error);
+        res.status(500).json({message: `Internal Server Error: ${error}`});
+    });
+});
+
+
 app.post('/api/users', (req, res) => {
     console.log('/api/users');
     console.log('request body:' + req.body);

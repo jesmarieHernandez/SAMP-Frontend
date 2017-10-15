@@ -26,9 +26,80 @@ class Stats extends Component {
 
     constructor(props, context) {
         super(props, context);
+
+        this.state = {
+            pending: 0,
+            cancelled: 0,
+            celebrated: 0
+        }
+    }
+
+    componentDidMount() {
+        fetch('/api/pending').then(response => {
+            if (response.ok) {
+                response.json().then(count => {
+                    this.setState({pending: count});
+                });
+            } else {
+                // response.json().then(error => {
+                //     this.props.showError(`Failed to add issue: ${error.message}`);
+                // });
+            }
+        }).catch(err => {
+            this.props.showError(`Error in sending data to server: ${err.message}`);
+        });
+
+        fetch('/api/cancelled').then(response => {
+            if (response.ok) {
+                response.json().then(count => {
+                    this.setState({cancelled: count});
+                });
+            } else {
+                // response.json().then(error => {
+                //     this.props.showError(`Failed to add issue: ${error.message}`);
+                // });
+            }
+        }).catch(err => {
+            this.props.showError(`Error in sending data to server: ${err.message}`);
+        });
+
+        fetch('/api/celebrated').then(response => {
+            if (response.ok) {
+                response.json().then(count => {
+                    this.setState({celebrated: count});
+                });
+            } else {
+                // response.json().then(error => {
+                //     this.props.showError(`Failed to add issue: ${error.message}`);
+                // });
+            }
+        }).catch(err => {
+            this.props.showError(`Error in sending data to server: ${err.message}`);
+        });
+
+        fetch(`/api/facilities/`).then(response => {
+            if (response.ok) {
+                response.json().then(results => {
+                    //console.log(results);
+                    this.setState({facilities: results});
+                    console.log(this.state.facilities);
+                    //this.props.router.push(`/activities/${createdRequest._id}`);
+                });
+            } else {
+                // response.json().then(error => {
+                //     this.props.showError(`Failed to add issue: ${error.message}`);
+                // });
+            }
+        }).catch(err => {
+            this.props.showError(`Error in sending data to server: ${err.message}`);
+        });
     }
 
     render() {
+
+        let data = [
+            {name: 'Activities', pending: this.state.pending, celebrated: this.state.celebrated, cancelled: this.state.cancelled},
+        ];
         return (
             <div className="container">
                 {/*<Jumbotron><h3>Stats</h3></Jumbotron>*/}
@@ -40,7 +111,7 @@ class Stats extends Component {
                     <Panel collapse header='Filter'>
                         {/*<td><Link to={`/activities/1`}>Hello</Link></td>*/}
 
-                        <p>Organization Acronym</p>
+                        <p>Activity stats for the last month</p>
 
                     </Panel>
                 </Col>
@@ -53,19 +124,10 @@ class Stats extends Component {
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="pv" fill="#8884d8" />
-                                <Bar dataKey="uv" fill="#82ca9d" />
-                            </BarChart>
-                        </Panel>
-                        <Panel  header="Something Else">
-                            <BarChart width={600} height={300} data={data}>
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <Tooltip />
-                                <Legend />
-                                <Bar dataKey="pv" fill="blue" />
-                                <Bar dataKey="uv" fill="green" />
+                                <Bar dataKey="pending" fill="#8884d8" />
+                                <Bar dataKey="celebrated" fill="#82ca9d" />
+                                <Bar dataKey="cancelled"  fill="#823333" />
+
                             </BarChart>
                         </Panel>
                     </Col>
@@ -77,21 +139,7 @@ class Stats extends Component {
 }
 
 
-const data = [
-    {name: 'Enero', uv: 4000, pv: 2400, amt: 2400},
-    {name: 'Febrero', uv: 3000, pv: 1398, amt: 2210},
-    {name: 'Marzo', uv: 2000, pv: 9800, amt: 2290},
-    {name: 'Abril', uv: 2780, pv: 3908, amt: 2000},
-    {name: 'Mayo', uv: 1890, pv: 4800, amt: 2181},
-    {name: 'Junio F', uv: 2390, pv: 3800, amt: 2500},
-    {name: 'Julio', uv: 3490, pv: 4300, amt: 2100},
-    {name: 'Agosto', uv: 3490, pv: 4300, amt: 2100},
-    {name: 'Septiembre', uv: 3490, pv: 4300, amt: 2100},
-    {name: 'Octubre', uv: 3490, pv: 4300, amt: 2100},
-    {name: 'Noviembre', uv: 3490, pv: 4300, amt: 2100},
-    {name: 'Diciembre', uv: 3490, pv: 4300, amt: 2100},
 
-];
 
 Stats.contextTypes = {
     initialState: React.PropTypes.object,
