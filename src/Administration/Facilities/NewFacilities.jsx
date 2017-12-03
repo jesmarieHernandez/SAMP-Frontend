@@ -65,9 +65,10 @@ class CreateFacilities extends Component {
 
         const newFacilities = {
             name: form.facilitiesName.value,
+            building: form.buildingName.value,
             creationDate: new Date(),
             managerName: form.facilitiesManagerName.value,
-            managerEmail: form.facilitiesManagerEmail.value
+            managerEmail: form.facilitiesManagerEmail.value,
         };
 
 
@@ -84,7 +85,10 @@ class CreateFacilities extends Component {
                     console.log('New facilities were created successfully!');
                     console.log('Facilities ID: ' + createdFacilities._id);
 
+/*
                     this.props.router.push(`/admin/facilities/${createdFacilities._id}/`);
+*/
+                    this.props.router.push(`/facilities/${createdFacilities._id}/`);
                 })
             } else {
                 response.json().then(error => {
@@ -108,17 +112,17 @@ class CreateFacilities extends Component {
                     <li ><Link to={`/admin/facilities`}>Facilities</Link></li>
                     <li className="active">Create New Facilities</li>
                 </ol>
-                <Col md={3}>
+{/*                <Col md={3}>
                     <Panel header='Instructions'>
-                        {/*<td><Link to={`/activities/1`}>Hello</Link></td>*/}
+                        /!*<td><Link to={`/activities/1`}>Hello</Link></td>*!/
 
                         <p>Facilities Name</p>
                         <p>Facilities Manager</p>
                         <p>Facilities Manager Email</p>
                     </Panel>
-                </Col>
+                </Col>*/}
 
-                <Col md={9}>
+                <Col md={12}>
                     {/*<div onClick={this.onSubmit}><Button>Request</Button></div>*/}
                     <Panel header="Create New Facilities">
                         <Form horizontal onSubmit={this.onSubmit} name="newFacilities">
@@ -127,19 +131,25 @@ class CreateFacilities extends Component {
                                     <Col componentClass={ControlLabel}>Facilities Name</Col>
                                     <FormControl name="facilitiesName"/>
                                 </Col>
+
+                                <Col sm={4}>
+                                    <Col componentClass={ControlLabel}>Building Name</Col>
+                                    <FormControl name="buildingName"/>
+                                </Col>
                             </FormGroup>
+
                             <FormGroup>
                                 <Col sm={4}>
                                     <Col componentClass={ControlLabel}>Manager Name</Col>
                                     <FormControl name="facilitiesManagerName"/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup>
+
                                 <Col sm={4}>
                                     <Col componentClass={ControlLabel}>Manager Email</Col>
                                     <FormControl name="facilitiesManagerEmail"/>
                                 </Col>
                             </FormGroup>
+
                             <ButtonToolbar>
                                 <Col md={6}>
                                     <Button bsStyle="primary" type="submit">

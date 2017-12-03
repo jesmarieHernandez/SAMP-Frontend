@@ -35,6 +35,7 @@ class Activities extends Component {
     }
 
     componentDidMount() {
+
         fetch('/api/activities').then(response => {
             if (response.ok) {
                 console.log('PUNETAA! :D');
@@ -72,10 +73,6 @@ class Activities extends Component {
         }).catch(err => {
             this.props.showError(`Error in sending data to server: ${err.message}`);
         });
-
-
-
-
     }
 
     render() {
@@ -85,9 +82,10 @@ class Activities extends Component {
 
             <Panel  header={activity.requestTitle}>
                 <td><Link to={`/activities/${activity._id}`}>{activity.requestTitle}</Link></td>
-                <p>Organization Acronym: {activity.organization.name}</p>
-                <p>Request Title: {activity.requestDate}</p>
-                <p>Request Description: {activity.facilities.name}</p>
+                <p>Description: {activity.activityDescription}</p>
+                <p>Organization: {activity.organization.name}</p>
+                <p>Facility: {activity.facilities.name}</p>
+                <p>Status: {activity.status}</p>
             </Panel>
 
             </Col>

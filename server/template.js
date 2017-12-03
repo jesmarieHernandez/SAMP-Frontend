@@ -1,5 +1,4 @@
 export default function template(body, initialState) {
-    console.log('PUTO: ' + initialState);
     return `<!DOCTYPE HTML>
 <html>
 <head>

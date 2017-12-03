@@ -59,6 +59,7 @@ class Facilities extends Component {
 
                 <Panel collapsible header={facilities.name}>
                     <p><Link to={`/admin/facilities/${facilities._id}`}>{facilities.name}</Link></p>
+                    <p>Building Name: {facilities.building}</p>
                     <p>Creation Date: {facilities.creationDate}</p>
                     <p>Manager Name: {facilities.managerName}</p>
                     <p>Manager Email: {facilities.managerEmail}</p>

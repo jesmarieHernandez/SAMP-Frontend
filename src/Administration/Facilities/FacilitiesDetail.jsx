@@ -37,7 +37,8 @@ class FacilitiesDetail extends Component {
                 name: '',
                 creationDate: '',
                 managerName: '',
-                managerEmail: ''
+                managerEmail: '',
+                building: ''
             }
         }
     }
@@ -76,10 +77,10 @@ class FacilitiesDetail extends Component {
                     <Panel  header={this.state.facilities.name}>
                         {/*<td><Link to={`/activities/${this.state.activity._id}`}>{this.state.activity.requestTitle}</Link></td>*/}
                         <p>Facilities Name: {this.state.facilities.name}</p>
+                        <p>Building Name: {this.state.facilities.building}</p>
                         <p>Creation Date: {this.state.facilities.creationDate}</p>
                         <p>Manager Name: {this.state.facilities.managerName}</p>
                         <p>Manager Email: {this.state.facilities.managerEmail}</p>
-
 
                         <Row>
                             <Col md="1"><Link to={`/activities/`}><Button className="btn btn-primary">Back</Button></Link></Col>

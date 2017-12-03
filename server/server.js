@@ -2,7 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
 import renderedPageRouter from './renderedPageRouter.jsx';
-import {ObjectId} from "bson";
+import {ObjectId} from 'bson';
 
 
 const app = express();
@@ -44,9 +44,10 @@ app.post('/api/activities', (req, res) => {
     console.log('/api/activities');
     console.log('request body:' + req.body);
     const newActivity = req.body;
-    //newActivity.requestDate = new Date();
 
     console.log('db: ' + db);
+    console.log(req.body.creationDate);
+    console.log(typeof(req.body.requestDate));
     db.collection('activities').insertOne(newActivity)
         .then(result => {
             console.log(result);
@@ -56,9 +57,57 @@ app.post('/api/activities', (req, res) => {
                 res.status(200).json(activity);
             })
         }).catch(error => {
-            console.log('ERROR: ' + error);
-            res.status(500).json({message: `Internal Server Error: ${error}`});
-        });
+        console.log('ERROR: ' + error);
+        res.status(500).json({message: `Internal Server Error: ${error}`});
+    });
+});
+
+app.post('/api/activities/:id/approve', (req, res) => {
+    console.log('/api/activities/:id/approve');
+    console.log('request body:' + req.body);
+
+    let activityId;
+    try {
+        activityId = new ObjectId(req.params.id);
+    } catch (error) {
+        res.status(422).json({message: `Invalid activity ID format: ${error}`});
+        return
+    }
+
+    db.collection('activities').updateOne({ _id: activityId }, {$set: {status: 'approved'}}).then(() =>
+    db.collection('activities').find({ _id: activityId}).limit(1)
+        .next()
+    ).then(updatedActivity => {
+        console.log("Approved succesfully");
+        res.json(updatedActivity);
+    }).catch(error => {
+        console.log(error);
+        res.status(500).json({ message: `Internal Server Error: ${error}`});
+    });
+});
+
+app.post('/api/activities/:id/deny', (req, res) => {
+    console.log('/api/activities/:id/deny');
+    console.log('request body:' + req.body);
+
+    let activityId;
+    try {
+        activityId = new ObjectId(req.params.id);
+    } catch (error) {
+        res.status(422).json({message: `Invalid activity ID format: ${error}`});
+        return
+    }
+
+    db.collection('activities').updateOne({ _id: activityId }, {$set: {status: 'denied' }}).then(() =>
+        db.collection('activities').find({ _id: activityId}).limit(1)
+            .next()
+    ).then(updatedActivity => {
+        console.log("Denied succesfully");
+        res.json(updatedActivity);
+    }).catch(error => {
+        console.log(error);
+        res.status(500).json({ message: `Internal Server Error: ${error}`});
+    });
 });
 
 app.get('/api/pending', (req, res) => {
@@ -125,15 +174,16 @@ app.post('/api/users', (req, res) => {
         }).catch(error => {
         console.log('ERROR: ' + error);
         res.status(500).jsoapp.get('/api/facilities/', (req, res) => {
-    db.collection('facilities').find().toArray()
-        .then(results => {
-            res.json(results);
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({message: `Internal Server Error: ${error}`});
+            db.collection('facilities').find().toArray()
+                .then(results => {
+                    res.json(results);
+                })
+                .catch(error => {
+                    console.log(error);
+                    res.status(500).json({message: `Internal Server Error: ${error}`});
+                });
         });
-});n({message: `Internal Server Error: ${error}`});
+        n({message: `Internal Server Error: ${error}`});
     });
 });
 
@@ -178,7 +228,6 @@ app.post('/api/organizations', (req, res) => {
         res.status(500).json({message: `Internal Server Error: ${error}`});
     });
 });
-
 
 
 app.get('/api/activities/', (req, res) => {
@@ -235,14 +284,14 @@ app.get('/api/activities/:id', (req, res) => {
     }
 
     db.collection('activities').find({_id: requestID}).limit(1)
-    .next()
-    .then(result => {
-        console.log(result);
-        if (!result) res.status(404).json({message: `No such request: ${requestID}`});
-        else {
-            res.json(result)
-        }
-    })
+        .next()
+        .then(result => {
+            console.log(result);
+            if (!result) res.status(404).json({message: `No such request: ${requestID}`});
+            else {
+                res.json(result)
+            }
+        })
         .catch(error => {
             console.log(error);
             res.status(500).json({message: `Internal Server Error: ${error}`});
@@ -291,6 +340,30 @@ app.get('/api/organizations/:id', (req, res) => {
                 res.json(result)
             }
         })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({message: `Internal Server Error: ${error}`});
+        });
+});
+
+app.get('/api/organizations/:id/activities', (req, res) => {
+    let organizationID;
+    try {
+        organizationID = new ObjectId(req.params.id);
+    } catch (error) {
+        res.status(422).json({message: `Invalid organization ID format: ${error}`});
+        return;
+    }
+    console.log(organizationID);
+
+    db.collection('activities').find().toArray().then(results => {
+        console.log('Numero de resultados pre: ' + results.length);
+        const activities = results.filter(function (activity) {
+            return activity.organization._id == organizationID;
+        });
+        console.log('Numero de resultados post: ' + activities.length);
+        res.json(activities);
+    })
         .catch(error => {
             console.log(error);
             res.status(500).json({message: `Internal Server Error: ${error}`});

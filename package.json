@@ -4,7 +4,7 @@
   "description": "Socio-Cultural Activities Management Platform",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.bundle.js",
+    "start": "nodemon dist/server.bundle.js",
     "start-hook": "nodemon -e js,jsx -w server,src server/start_hook.js",
     "compile": "webpack --watch",
     "compile-server": "webpack --config webpack.server-config.js",
@@ -22,8 +22,10 @@
   "author": "LazyCatSoftware",
   "license": "ISC",
   "dependencies": {
+    "babel-core": "^6.26.0",
     "babel-polyfill": "^6.13.0",
     "body-parser": "^1.15.2",
+    "bson": "^1.0.4",
     "debug": "^2.6.8",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
@@ -33,10 +35,13 @@
     "react": "^15.3.1",
     "react-avatar": "^2.3.0",
     "react-bootstrap": "^0.30.6",
+    "react-bootstrap-date-picker": "^5.1.0",
+    "react-bootstrap-time-picker": "^1.0.3",
     "react-dom": "^15.3.1",
     "react-router": "^2.7.0",
     "react-router-bootstrap": "^0.23.1",
     "react-select": "^1.0.0-rc.2",
+    "recharts": "^1.0.0-beta.1",
     "source-map-support": "^0.4.2"
   },
   "devDependencies": {

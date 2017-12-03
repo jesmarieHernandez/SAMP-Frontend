@@ -35,7 +35,7 @@ class Admin extends Component {
                     <li/>
                     <li className="active">Admin Panel</li>
                 </ol>
-                <Col md={3}>
+{/*                <Col md={3}>
                     <Panel collapse header='Admin Panel'>
                         <ul>
                             <li ><Link to={`/admin/organizations`}>Manage Organizations</Link></li>
@@ -44,14 +44,13 @@ class Admin extends Component {
 
                         </ul>
                     </Panel>
-                </Col>
-                <Col md={9}>
+                </Col>*/}
+                <Col md={12}>
                     <Panel collapse header='Admin Panel'>
                         <ul>
                             <li ><Link to={`/admin/organizations`}>Manage Organizations</Link></li>
-
-                            <li>Create New Organization</li>
-                            <li>Edit Existing Organization</li>
+                            <li ><Link to={`/admin/facilities`}>Manage Facilities</Link></li>
+                            <li ><Link to={`/admin/users`}>Manage Users</Link></li>
                         </ul>
                     </Panel>
 

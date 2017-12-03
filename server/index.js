@@ -14,26 +14,6 @@ MongoClient.connect('mongodb://localhost/SAMP').then(connection => {
     db = connection;
     console.log('db: ' + db);
 
-    const newActivity = {
-        requestTitle: 'Bedrock Boy Scouts Fundraising-' + Date.now(),
-        organizationName: 'The Flintstones',
-        requestDate: Date.now(),
-        facilities: 'Bedrock Convention Center'
-    };
-
-    // db.collection('activities').insertOne(newActivity).then(result =>
-    //
-    //         console.log('result: ' + result)
-    //     // db.collection('activities').find({_id: result.insertedId}).limit(1)
-    //     //     .next()
-    // )
-    //     .then(savedIssue => {
-    //         res.json(savedIssue);
-    //     })
-    //     .catch(error => {
-    //         console.log('ERROR: ' + error);
-    //         res.status(500).json({message: `Internal Server Error: ${error}`});
-    //     });
     db.collection('activities').find().count().then((count) => {
         console.log('Activities retrieved: ' + count);
         // db.close();

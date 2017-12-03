@@ -49,9 +49,15 @@ class CreateOrganization extends Component {
         const newOrganization = {
             name: form.organizationName.value,
             type: form.organizationType.value,
+            initials: form.organizationInitials.value,
             creationDate: new Date(),
             counselorName: form.organizationCounselorName.value,
-            counselorEmail: form.organizationCounselorEmail.value
+            counselorEmail: form.organizationCounselorEmail.value,
+            counselorTelephone: form.organizationCounselorTelephone.value,
+            counselorFaculty: form.organizationCounselorFaculty.value,
+            counselorDepartment: form.organizationCounselorDepartment.value,
+            counselorOfficeNumber: form.organizationCounselorOfficeNumber.value
+
         };
 
 
@@ -105,39 +111,74 @@ class CreateOrganization extends Component {
                 </Col>
 
                 <Col md={9}>
-                    {/*<div onClick={this.onSubmit}><Button>Request</Button></div>*/}
                     <Panel header="Create New Organization">
                         <Form horizontal onSubmit={this.onSubmit} name="newOrganization">
                             <FormGroup>
-                                <Col sm={4}>
+                                <Col sm={5}>
                                     <Col componentClass={ControlLabel}>Organization Name</Col>
                                     <FormControl name="organizationName"/>
                                 </Col>
-                            </FormGroup>
-                            <FormGroup>
+
                                 <Col sm={4}>
                                     <Col componentClass={ControlLabel}>Organization Type</Col>
                                     <FormControl name="organizationType"/>
                                 </Col>
+
+                                <Col sm={3}>
+                                    <Col componentClass={ControlLabel}>Organization Initials</Col>
+                                    <FormControl name="organizationInitials"/>
+                                </Col>
                             </FormGroup>
+
                             <FormGroup>
                                 <Col sm={4}>
                                     <Col componentClass={ControlLabel}>Counselor Name</Col>
                                     <FormControl name="organizationCounselorName"/>
                                 </Col>
                             </FormGroup>
+
                             <FormGroup>
                                 <Col sm={4}>
                                     <Col componentClass={ControlLabel}>Counselor Email</Col>
                                     <FormControl name="organizationCounselorEmail"/>
                                 </Col>
                             </FormGroup>
+
+                            <FormGroup>
+                                <Col sm={4}>
+                                    <Col componentClass={ControlLabel}>Counselor Telephone</Col>
+                                    <FormControl name="organizationCounselorTelephone"/>
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Col sm={4}>
+                                    <Col componentClass={ControlLabel}>Counselor Faculty</Col>
+                                    <FormControl name="organizationCounselorFaculty"/>
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Col sm={4}>
+                                    <Col componentClass={ControlLabel}>Counselor Department</Col>
+                                    <FormControl name="organizationCounselorDepartment"/>
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Col sm={4}>
+                                    <Col componentClass={ControlLabel}>Counselor Office Number</Col>
+                                    <FormControl name="organizationCounselorOfficeNumber"/>
+                                </Col>
+                            </FormGroup>
+
                             <ButtonToolbar>
                                 <Col md={6}>
                                     <Button bsStyle="primary" type="submit">
                                         Submit </Button>
                                 </Col>
                             </ButtonToolbar>
+
                         </Form>
                     </Panel>
                 </Col>

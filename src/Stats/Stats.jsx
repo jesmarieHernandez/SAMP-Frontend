@@ -125,8 +125,8 @@ class Stats extends Component {
                                 <Tooltip />
                                 <Legend />
                                 <Bar dataKey="pending" fill="#8884d8" />
-                                <Bar dataKey="celebrated" fill="#82ca9d" />
-                                <Bar dataKey="cancelled"  fill="#823333" />
+                                <Bar dataKey="approved" fill="#82ca9d" />
+                                <Bar dataKey="denied"  fill="#823333" />
 
                             </BarChart>
                         </Panel>
